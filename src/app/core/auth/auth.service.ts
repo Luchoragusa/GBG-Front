@@ -3,11 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { catchError, Observable, of, switchMap, throwError } from 'rxjs';
 import { AuthUtils } from 'app/core/auth/auth.utils';
 import { UserService } from 'app/core/user/user.service';
+import { environment } from 'environments/environment';
 
 @Injectable()
 export class AuthService
 {
     private _authenticated: boolean = false;
+    url = environment.apiUrl + '/users';
 
     /**
      * Constructor
@@ -70,21 +72,21 @@ export class AuthService
         // Throw error, if the user is already logged in
         if ( this._authenticated )
         {
-            return throwError('User is already logged in.');
+            return throwError('El usuario ya esta logeado.');
         }
 
-        return this._httpClient.post('api/auth/sign-in', credentials).pipe(
+        return this._httpClient.post(`${this.url}/login`, credentials).pipe(
             switchMap((response: any) => {
 
                 // Store the access token in the local storage
-                this.accessToken = response.accessToken;
+                this.accessToken = response.msg.token;
 
                 // Set the authenticated flag to true
                 this._authenticated = true;
 
                 // Store the user on the user service
-                this._userService.user = response.user;
-
+                this._userService.user = response.msg.user;
+                console.log(response);
                 // Return a new observable with the response
                 return of(response);
             })
