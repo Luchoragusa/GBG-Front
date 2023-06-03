@@ -4,6 +4,13 @@ import { FuseNavigationItem } from '@fuse/components/navigation';
 
 const menu: FuseNavigationItem[] = [
     {
+        id   : 'dashboard',
+        title: 'Inicio',
+        type : 'basic',
+        icon : 'heroicons_outline:home',
+        link : '/dashboard'
+    },
+    {
         id   : 'autopart',
         title: 'Repuestos',
         type : 'basic',

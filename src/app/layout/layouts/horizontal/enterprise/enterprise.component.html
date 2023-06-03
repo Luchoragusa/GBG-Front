@@ -15,8 +15,8 @@
             <div class="flex items-center h-20 pt-6 px-8">
                 <img
                     class="w-24"
-                    src="assets/images/logo/logo-text-on-dark.svg"
-                    alt="Logo image">
+                    src="assets/images/logo/logoLlave.png">
+                    alt="Llave logo">
             </div>
         </ng-container>
     </fuse-vertical-navigation>
@@ -34,9 +34,9 @@
                 <ng-container *ngIf="!isScreenSmall">
                     <div class="flex items-center">
                         <img
-                            class="w-24"
-                            src="assets/images/logo/logo-text-on-dark.svg"
-                            alt="Logo image">
+                            class="w-12"
+                            src="assets/images/logo/logoLlave-White.png"
+                            alt="Llave logo">
                     </div>
                 </ng-container>
                 <!-- Navigation toggle button -->
@@ -49,18 +49,9 @@
                 </ng-container>
                 <!-- Components -->
                 <div class="flex items-center pl-2 ml-auto space-x-0.5 sm:space-x-2">
-                    <languages></languages>
-                    <fuse-fullscreen class="hidden md:block"></fuse-fullscreen>
-                    <search [appearance]="'bar'"></search>
-                    <shortcuts></shortcuts>
-                    <messages></messages>
+                    <fuse-fullscreen class="hidden md:block"></fuse-fullscreen>                                   
                     <notifications></notifications>
-                    <button
-                        class="lg:hidden"
-                        mat-icon-button
-                        (click)="quickChat.toggle()">
-                        <mat-icon [svgIcon]="'heroicons_outline:chat-alt-2'"></mat-icon>
-                    </button>
+                    <settings></settings>
                     <user></user>
                 </div>
             </div>
@@ -95,6 +86,3 @@
     </div>
 
 </div>
-
-<!-- Quick chat -->
-<quick-chat #quickChat="quickChat"></quick-chat>

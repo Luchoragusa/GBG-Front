@@ -34,7 +34,7 @@ export interface AppConfig
  */
 export const appConfig: AppConfig = {
     layout : 'classy',
-    scheme : 'light',
+    scheme : 'auto',
     screens: {
         sm: '600px',
         md: '960px',
@@ -47,25 +47,5 @@ export const appConfig: AppConfig = {
             id  : 'theme-default',
             name: 'Default'
         },
-        {
-            id  : 'theme-brand',
-            name: 'Brand'
-        },
-        {
-            id  : 'theme-teal',
-            name: 'Teal'
-        },
-        {
-            id  : 'theme-rose',
-            name: 'Rose'
-        },
-        {
-            id  : 'theme-purple',
-            name: 'Purple'
-        },
-        {
-            id  : 'theme-amber',
-            name: 'Amber'
-        }
     ]
 };

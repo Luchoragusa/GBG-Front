@@ -18,7 +18,8 @@ import { Layout } from 'app/layout/layout.types';
             }
         `
     ],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    exportAs       : 'settings'
 })
 export class SettingsComponent implements OnInit, OnDestroy
 {
