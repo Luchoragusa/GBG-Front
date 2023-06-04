@@ -59,33 +59,6 @@ export class AuthMockApi
             );
 
         // -----------------------------------------------------------------------------------------------------
-        // @ Sign in - POST
-        // -----------------------------------------------------------------------------------------------------
-        // this._fuseMockApiService
-        //     .onPost('api/auth/sign-in', 1500)
-        //     .reply(({request}) => {
-
-        //         // Sign in successful
-        //         if ( request.body.email === 'hughes.brian@company.com' && request.body.password === 'admin' )
-        //         {
-        //             return [
-        //                 200,
-        //                 {
-        //                     user       : cloneDeep(this._user),
-        //                     accessToken: this._generateJWTToken(),
-        //                     tokenType  : 'bearer'
-        //                 }
-        //             ];
-        //         }
-
-        //         // Invalid credentials
-        //         return [
-        //             404,
-        //             false
-        //         ];
-        //     });
-
-        // -----------------------------------------------------------------------------------------------------
         // @ Verify and refresh the access token - POST
         // -----------------------------------------------------------------------------------------------------
         this._fuseMockApiService
