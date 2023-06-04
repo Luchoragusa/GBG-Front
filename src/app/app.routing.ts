@@ -74,7 +74,8 @@ export const appRoutes: Route[] = [
             initialData: InitialDataResolver,
         },
         children   : [
-            {path: 'dashboard', loadChildren: () => import('app/modules/admin/dashboard/dashboard.module').then(m => m.DashboardModule)},
+            {path: 'dashboard', loadChildren: () => import('app/modules/admin/project/project.module').then(m => m.ProjectModule)},
+            // {path: 'dashboard', loadChildren: () => import('app/modules/admin/dashboard/dashboard.module').then(m => m.DashboardModule)},
             {path: 'autopart', loadChildren: () => import('app/modules/admin/autopart/autopart.module').then(m => m.AutopartModule)},
             {path: 'part-type', loadChildren: () => import('app/modules/admin/part-type/part-type.module').then(m => m.PartTypeModule)},
             {path: 'car-brand', loadChildren: () => import('app/modules/admin/car-brand/car-brand.module').then(m => m.CarBrandModule)},
