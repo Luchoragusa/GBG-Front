@@ -18,6 +18,7 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy
     isScreenSmall: boolean;
     navigation: Navigation;
     user: User;
+    status: 'online';
     private _unsubscribeAll: Subject<any> = new Subject<any>();
 
     /**
@@ -67,6 +68,7 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy
             .pipe((takeUntil(this._unsubscribeAll)))
             .subscribe((user: User) => {
                 this.user = user;
+                console.log ( this.user);
             });
 
         // Subscribe to media changes
