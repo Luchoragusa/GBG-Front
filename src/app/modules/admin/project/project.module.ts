@@ -14,8 +14,8 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { TranslocoModule } from '@ngneat/transloco';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { SharedModule } from 'app/shared/shared.module';
-import { ProjectComponent } from 'app/modules/admin/dashboard/project.component';
-import { projectRoutes } from 'app/modules/admin/dashboard/project.routing';
+import { ProjectComponent } from 'app/modules/admin/project/project.component';
+import { projectRoutes } from 'app/modules/admin/project/project.routing';
 
 @NgModule({
     declarations: [
