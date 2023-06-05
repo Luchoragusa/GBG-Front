@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewEncapsulatio
 import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { ApexOptions } from 'ng-apexcharts';
-import { ProjectService } from 'app/modules/admin/project/project.service';
+import { ProjectService } from 'app/modules/admin/dashboard/project.service';
 
 @Component({
     selector       : 'project',

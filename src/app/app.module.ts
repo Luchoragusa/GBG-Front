@@ -13,7 +13,6 @@ import { LayoutModule } from 'app/layout/layout.module';
 import { AppComponent } from 'app/app.component';
 import { appRoutes } from 'app/app.routing';
 import { AutopartComponent } from './modules/admin/autopart/autopart.component';
-import { DashboardComponent } from './modules/admin/dashboard/dashboard.component';
 
 // Angular Material Modules
 import {MatTableModule} from '@angular/material/table';
@@ -48,7 +47,6 @@ const routerConfig: ExtraOptions = {
     declarations: [
         AppComponent,
         AutopartComponent,
-        DashboardComponent,
         CarBrandComponent,
         PartBrandComponent,
         PartTypeComponent,
