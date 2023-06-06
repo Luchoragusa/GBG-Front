@@ -113,7 +113,7 @@ export class CarBrandComponent implements OnInit {
            if (error.status == 500) {
              this.setDialog(error.error.msg);
            }
-           console.log("Hola!");
+            ("Hola!");
            this.setDialog("Error de conexion con el servidor");
            this.isEdit = false;
          }

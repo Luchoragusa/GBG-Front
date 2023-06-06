@@ -30,8 +30,8 @@ export class UserService
      */
     set user(value: User)
     {
-        console.log(value);
         // Store the value
+        localStorage.setItem('userId', value.id);
         this._user.next(value);
     }
 
@@ -49,13 +49,9 @@ export class UserService
      */
     get(): Observable<User>
     {
-        let userInfo: User | undefined;
+        const userId: number = localStorage.getItem('userId') ? parseInt(localStorage.getItem('userId'), 10) : null;
 
-        this._user.pipe(take(1)).subscribe((user: User) => {
-            userInfo = user;
-        });
-
-        return this._httpClient.get<User>(`${this.url}/${userInfo.id}`, ).pipe(
+        return this._httpClient.get<User>(`${this.url}/${userId}`, ).pipe(
             tap((response: User) => {
                 this._user.next(response);
             }

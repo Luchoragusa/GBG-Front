@@ -4,12 +4,13 @@ import { catchError, Observable, of, switchMap, throwError } from 'rxjs';
 import { AuthUtils } from 'app/core/auth/auth.utils';
 import { UserService } from 'app/core/user/user.service';
 import { environment } from 'environments/environment';
+import jwt_decode from 'jwt-decode';
 
 @Injectable()
 export class AuthService
 {
-    private _authenticated: boolean = false;
     url = environment.apiUrl + '/users';
+    private _authenticated: boolean = false;
 
     /**
      * Constructor
@@ -86,7 +87,7 @@ export class AuthService
 
                 // Store the user on the user service
                 this._userService.user = response.msg.user;
-                console.log(response);
+
                 // Return a new observable with the response
                 return of(response);
             })
@@ -164,11 +165,12 @@ export class AuthService
      */
     check(): Observable<boolean>
     {
-        // Check if the user is logged in
-        if ( this._authenticated )
+        if ( this.accessToken && !AuthUtils.isTokenExpired(this.accessToken) )
         {
             return of(true);
+        } else {
         }
+
 
         // Check the access token availability
         if ( !this.accessToken )

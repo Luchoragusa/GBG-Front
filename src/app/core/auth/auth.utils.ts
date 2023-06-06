@@ -4,7 +4,8 @@
 // Methods are derivations of the Auth0 Angular-JWT helper service methods
 // https://github.com/auth0/angular2-jwt
 // -----------------------------------------------------------------------------------------------------
-
+import jwtDecode from 'jwt-decode';
+import * as moment from 'moment';
 export class AuthUtils
 {
     /**
@@ -33,19 +34,59 @@ export class AuthUtils
         }
 
         // Get the expiration date
-        const date = this._getTokenExpirationDate(token);
+        const expirationTime = this._getTokenExpirationDate(token);
 
-        offsetSeconds = offsetSeconds || 0;
-
-        if ( date === null )
+        if ( expirationTime === null )
         {
             return true;
         }
 
         // Check if the token is expired
-        return !(date.valueOf() > new Date().valueOf() + offsetSeconds * 1000);
+        if ( expirationTime.valueOf() > moment().unix() ){
+            return false;
+        } else {
+            return true;
+        }
     }
 
+    /**
+     * Decode token
+     *
+     * @param token
+     * @private
+     */
+    private static _decodeToken(token: string): any
+    {
+        // Return if there is no token
+        if ( !token )
+        {
+            return null;
+        }
+
+        const payload: any = jwtDecode(token);
+
+        return payload;
+    }
+
+    /**
+     * Get token expiration date
+     *
+     * @param token
+     * @private
+     */
+    private static _getTokenExpirationDate(token: string): any
+    {
+        // Get the decoded token
+        const decodedToken = this._decodeToken(token);
+
+        // Return if the decodedToken doesn't have an 'exp' field
+        if ( !decodedToken.hasOwnProperty('expiredAt') )
+        {
+            return null;
+        }
+
+        return decodedToken['expiredAt'];
+    }
     // -----------------------------------------------------------------------------------------------------
     // @ Private methods
     // -----------------------------------------------------------------------------------------------------
@@ -81,7 +122,7 @@ export class AuthUtils
             ~buffer &&
             (
                 (bs = bc % 4 ? bs * 64 + buffer : buffer),
-                    // and if not first of each 4 characters,
+                // and if not first of each 4 characters,
                     // convert the first 8 bits to one ascii character
                 bc++ % 4
             )
@@ -145,60 +186,4 @@ export class AuthUtils
         return this._b64DecodeUnicode(output);
     }
 
-    /**
-     * Decode token
-     *
-     * @param token
-     * @private
-     */
-    private static _decodeToken(token: string): any
-    {
-        // Return if there is no token
-        if ( !token )
-        {
-            return null;
-        }
-
-        // Split the token
-        const parts = token.split('.');
-
-        if ( parts.length !== 3 )
-        {
-            throw new Error('The inspected token doesn\'t appear to be a JWT. Check to make sure it has three parts and see https://jwt.io for more.');
-        }
-
-        // Decode the token using the Base64 decoder
-        const decoded = this._urlBase64Decode(parts[1]);
-
-        if ( !decoded )
-        {
-            throw new Error('Cannot decode the token.');
-        }
-
-        return JSON.parse(decoded);
-    }
-
-    /**
-     * Get token expiration date
-     *
-     * @param token
-     * @private
-     */
-    private static _getTokenExpirationDate(token: string): Date | null
-    {
-        // Get the decoded token
-        const decodedToken = this._decodeToken(token);
-
-        // Return if the decodedToken doesn't have an 'exp' field
-        if ( !decodedToken.hasOwnProperty('exp') )
-        {
-            return null;
-        }
-
-        // Convert the expiration date
-        const date = new Date(0);
-        date.setUTCSeconds(decodedToken.exp);
-
-        return date;
-    }
 }
