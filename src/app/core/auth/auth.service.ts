@@ -73,7 +73,7 @@ export class AuthService
         // Throw error, if the user is already logged in
         if ( this._authenticated )
         {
-            return throwError('El usuario ya esta logeado.');
+            return throwError('El usuario ya esta logueado.');
         }
 
         return this._httpClient.post(`${this.url}/login`, credentials).pipe(
