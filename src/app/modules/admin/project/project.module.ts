@@ -17,6 +17,7 @@ import { SharedModule } from 'app/shared/shared.module';
 import { ProjectComponent } from 'app/modules/admin/project/project.component';
 import { CountUpModule } from 'ngx-countup';
 import { FuseHighlightModule } from '@fuse/components/highlight';
+import { FuseCardModule } from '@fuse/components/card';
 
 const dashboardRoutes: Route[] = [
     {
@@ -47,7 +48,8 @@ const dashboardRoutes: Route[] = [
         SharedModule,
         RouterModule.forChild(dashboardRoutes),
         CountUpModule,
-        FuseHighlightModule
+        FuseHighlightModule,
+        FuseCardModule
     ]
 })
 export class ProjectModule
