@@ -29,7 +29,9 @@
                                     <div class="text-lg font-medium tracking-tight leading-6 truncate">{{autoPartsData.model}}</div>
                                 </div>
                                 <div class="flex flex-col items-center mt-6">
-                                    <div class="text-9xl font-bold tracking-tight leading-none text-blue-500">{{autoPartsData.total}}</div>
+                                    <div class="text-9xl font-bold tracking-tight leading-none text-blue-500">
+                                        <h1 [countUp]="autoPartsData.total" (complete)="doSomethingOnComplete()">0</h1>
+                                    </div>
                                 </div>
                             </div>
                             <!-- Overdue -->
@@ -38,7 +40,9 @@
                                     <div class="text-lg font-medium tracking-tight leading-6 truncate">{{partBrandData.model}}</div>
                                 </div>
                                 <div class="flex flex-col items-center mt-6">
-                                    <div class="text-9xl font-bold tracking-tight leading-none text-red-500">{{partBrandData.total}}</div>
+                                    <div class="text-9xl font-bold tracking-tight leading-none text-red-500">
+                                        <h1 [countUp]="partBrandData.total" (complete)="doSomethingOnComplete()">0</h1>
+                                    </div>
                                 </div>
                             </div>
                             <!-- Issues -->
@@ -47,7 +51,9 @@
                                     <div class="text-lg font-medium tracking-tight leading-6 truncate">{{carBrandData.model}}</div>
                                 </div>
                                 <div class="flex flex-col items-center mt-6">
-                                    <div class="text-9xl font-bold tracking-tight leading-none text-amber-500">{{carBrandData.total}}</div>
+                                    <div class="text-9xl font-bold tracking-tight leading-none text-amber-500">
+                                        <h1 [countUp]="carBrandData.total" (complete)="doSomethingOnComplete()">0</h1>
+                                    </div>
                                 </div>
                             </div>
                             <!-- Features -->
@@ -56,7 +62,9 @@
                                     <div class="text-lg font-medium tracking-tight leading-6 truncate">{{partTypesData.model}}</div>
                                 </div>
                                 <div class="flex flex-col items-center mt-6">
-                                    <div class="text-9xl font-bold tracking-tight leading-none text-green-500">{{partTypesData.total}}</div>
+                                    <div class="text-9xl font-bold tracking-tight leading-none text-green-500">
+                                        <h1 [countUp]="partTypesData.total" (complete)="doSomethingOnComplete()">0</h1>
+                                    </div>
                                     <!-- <div class="flex items-baseline justify-center w-full mt-5 text-secondary">
                                         <div class="text-md font-medium truncate">Esta semana:</div>
                                         <div class="ml-1.5 text-lg font-semibold">16</div>

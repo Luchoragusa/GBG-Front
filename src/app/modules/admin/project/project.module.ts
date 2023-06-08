@@ -15,6 +15,7 @@ import { TranslocoModule } from '@ngneat/transloco';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { SharedModule } from 'app/shared/shared.module';
 import { ProjectComponent } from 'app/modules/admin/project/project.component';
+import { CountUpModule } from 'ngx-countup';
 
 const dashboardRoutes: Route[] = [
     {
@@ -44,6 +45,7 @@ const dashboardRoutes: Route[] = [
         TranslocoModule,
         SharedModule,
         RouterModule.forChild(dashboardRoutes),
+        CountUpModule
     ]
 })
 export class ProjectModule
