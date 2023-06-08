@@ -14,16 +14,17 @@
     <!-- Main -->
     <div class="flex-auto border-t -mt-px pt-4 sm:pt-6">
         <div class="w-full max-w-screen-xl mx-auto">
-            <!-- Tabs -->
+            <!-- Grupo de arriba -->
             <mat-tab-group
                 class="sm:px-2"
-                [animationDuration]="'0'">
+                [animationDuration]="'0'"
+                class="invisible-tabs">
 
-                <!-- Home -->
-                <mat-tab label="Home">
+                <!-- Stats de los repuestos -->
+                <mat-tab>
                     <ng-template matTabContent>
                         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 w-full min-w-0">
-                            <!-- Summary -->
+                            <!-- Repuestos -->
                             <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
                                 <div class="flex items-start justify-between">
                                     <div class="text-lg font-medium tracking-tight leading-6 truncate">{{autoPartsData.model}}</div>
@@ -34,7 +35,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- Overdue -->
+                            <!-- Marca de repuestos -->
                             <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
                                 <div class="flex items-start justify-between">
                                     <div class="text-lg font-medium tracking-tight leading-6 truncate">{{partBrandData.model}}</div>
@@ -45,7 +46,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- Issues -->
+                            <!-- Marcas de autos -->
                             <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
                                 <div class="flex items-start justify-between">
                                     <div class="text-lg font-medium tracking-tight leading-6 truncate">{{carBrandData.model}}</div>
@@ -56,7 +57,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- Features -->
+                            <!-- Tipos de repuestos -->
                             <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
                                 <div class="flex items-start justify-between">
                                     <div class="text-lg font-medium tracking-tight leading-6 truncate">{{partTypesData.model}}</div>
@@ -76,5 +77,88 @@
                 </mat-tab>
             </mat-tab-group>
         </div>
+
+        <div class="w-full max-w-screen-xl mx-auto">
+            <hr class="divider mr-44 ml-44">
+            <!-- Grupo de abajo -->
+            <mat-tab-group
+                class="sm:px-2"
+                [animationDuration]="'0'"
+                class="invisible-tabs">
+
+                <!-- Ultimos 4 repuestos modificados -->
+                <mat-tab label="Home">
+                    <ng-template matTabContent>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-6 w-full min-w-0">
+                            <!-- Repuestos -->
+                            <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
+                                <div class="flex items-start justify-between">
+                                    <div class="text-lg font-medium tracking-tight leading-6 truncate">{{autoPartsData.model}}</div>
+                                </div>
+                                <div class="flex flex-col items-center mt-6">
+                                    <div class="text-9xl font-bold tracking-tight leading-none text-blue-500">
+                                        <h1 [countUp]="autoPartsData.total" (complete)="doSomethingOnComplete()">0</h1>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Marca de repuestos -->
+                            <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
+                                <div class="flex items-start justify-between">
+                                    <div class="text-lg font-medium tracking-tight leading-6 truncate">{{partBrandData.model}}</div>
+                                </div>
+                                <div class="flex flex-col items-center mt-6">
+                                    <div class="text-9xl font-bold tracking-tight leading-none text-red-500">
+                                        <h1 [countUp]="partBrandData.total" (complete)="doSomethingOnComplete()">0</h1>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Marcas de autos -->
+                            <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
+                                <div class="flex items-start justify-between">
+                                    <div class="text-lg font-medium tracking-tight leading-6 truncate">{{carBrandData.model}}</div>
+                                </div>
+                                <div class="flex flex-col items-center mt-6">
+                                    <div class="text-9xl font-bold tracking-tight leading-none text-amber-500">
+                                        <h1 [countUp]="carBrandData.total" (complete)="doSomethingOnComplete()">0</h1>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Tipos de repuestos -->
+                            <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
+                                <div class="flex items-start justify-between">
+                                    <div class="text-lg font-medium tracking-tight leading-6 truncate">{{partTypesData.model}}</div>
+                                </div>
+                                <div class="flex flex-col items-center mt-6">
+                                    <div class="text-9xl font-bold tracking-tight leading-none text-green-500">
+                                        <h1 [countUp]="partTypesData.total" (complete)="doSomethingOnComplete()">0</h1>
+                                    </div>
+                                    <!-- <div class="flex items-baseline justify-center w-full mt-5 text-secondary">
+                                        <div class="text-md font-medium truncate">Esta semana:</div>
+                                        <div class="ml-1.5 text-lg font-semibold">16</div>
+                                    </div> -->
+                                </div>
+                            </div>
+
+                            <!-- Tipos de repuestos -->
+                            <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
+                                <div class="flex items-start justify-between">
+                                    <div class="text-lg font-medium tracking-tight leading-6 truncate">{{partTypesData.model}}</div>
+                                </div>
+                                <div class="flex flex-col items-center mt-6">
+                                    <div class="text-9xl font-bold tracking-tight leading-none text-green-500">
+                                        <h1 [countUp]="partTypesData.total" (complete)="doSomethingOnComplete()">0</h1>
+                                    </div>
+                                    <!-- <div class="flex items-baseline justify-center w-full mt-5 text-secondary">
+                                        <div class="text-md font-medium truncate">Esta semana:</div>
+                                        <div class="ml-1.5 text-lg font-semibold">16</div>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+
     </div>
 </div>

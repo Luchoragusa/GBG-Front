@@ -1,0 +1,11 @@
+.invisible-tabs {
+    > .mat-tab-header {
+      display: none;
+    }
+  }
+
+  .divider {
+    margin: 0;
+    border: 10px solid rgb(36, 49, 163);
+    border-radius: 25px;
+  }

@@ -16,6 +16,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { SharedModule } from 'app/shared/shared.module';
 import { ProjectComponent } from 'app/modules/admin/project/project.component';
 import { CountUpModule } from 'ngx-countup';
+import { FuseHighlightModule } from '@fuse/components/highlight';
 
 const dashboardRoutes: Route[] = [
     {
@@ -45,7 +46,8 @@ const dashboardRoutes: Route[] = [
         TranslocoModule,
         SharedModule,
         RouterModule.forChild(dashboardRoutes),
-        CountUpModule
+        CountUpModule,
+        FuseHighlightModule
     ]
 })
 export class ProjectModule

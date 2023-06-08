@@ -8,6 +8,7 @@ import { Dashboard } from 'app/core/dashboard/dashboard';
 @Component({
     selector       : 'project',
     templateUrl    : './project.component.html',
+    styleUrls      : ['./project.component.scss'],
     encapsulation  : ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
