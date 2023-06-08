@@ -24,6 +24,6 @@ export class PartBrandService {
 
   updatePartBrand(partBrand: any): Observable<PartBrand> {
     return this._http.put<PartBrand>(`${this.url}/${partBrand.id}`, partBrand);
-  }  
+  }
 }
 
