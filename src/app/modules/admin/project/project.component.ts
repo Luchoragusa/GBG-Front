@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { ApexOptions } from 'ng-apexcharts';
 import { DashboardService } from 'app/core/dashboard/dashboard.service';
+import { Dashboard } from 'app/core/dashboard/dashboard';
 
 @Component({
     selector       : 'project',
@@ -20,8 +21,20 @@ export class ProjectComponent implements OnInit, OnDestroy
     chartYearlyExpenses: ApexOptions = {};
     data: any;
     selectedProject: string = 'ACME Corp. Backend App';
-    private _unsubscribeAll: Subject<any> = new Subject<any>();
 
+
+    // Mis variables
+    dashboardData   : Dashboard[] = null;
+    autoPartsData   !: Dashboard ;
+    partTypesData   !: Dashboard ;
+    partBrandData   !: Dashboard ;
+    carBrandData    !: Dashboard ;
+
+    viewAlert:boolean = false;
+    dialogMessage !: string;
+
+    private _unsubscribeAll: Subject<any> = new Subject<any>();
+    
     /**
      * Constructor
      */
@@ -42,17 +55,19 @@ export class ProjectComponent implements OnInit, OnDestroy
     ngOnInit(): void
     {
         // Get the data
-        // this._dashboardService.data$
-        //     .pipe(takeUntil(this._unsubscribeAll))
-        //     .subscribe((data) => {
-
-        //         // Store the data
-        //         this.data = data;
-
-        //         // Prepare the chart data
-        //         this._prepareChartData();
-        //     });
-
+        this._dashboardService.getDashboardCounts().subscribe(
+            next => {
+              this.dashboardData = next;
+              this.setData();
+            },
+            error => {
+              if (error.status == 500) {
+                this.setDialog(error.error.msg);
+              }
+              this.setDialog("Error de conexion con el servidor");
+            }
+        );
+        
         // Attach SVG fill fixer to all ApexCharts
         window['Apex'] = {
             chart: {
@@ -93,6 +108,12 @@ export class ProjectComponent implements OnInit, OnDestroy
         return item.id || index;
     }
 
+      // Metodo que muestra el dialog para mostrar el error
+    setDialog (message: string){
+        this.dialogMessage = message;
+        this.viewAlert= true;
+    }
+
     // -----------------------------------------------------------------------------------------------------
     // @ Private methods
     // -----------------------------------------------------------------------------------------------------
@@ -107,6 +128,27 @@ export class ProjectComponent implements OnInit, OnDestroy
      * @param element
      * @private
      */
+    private setData() {
+        this.dashboardData.forEach(element => {
+            switch (element.model) {
+                case 'Repuestos':
+                    this.autoPartsData = element;
+                    break;
+                case 'Tipos de repuestos':
+                    this.partTypesData = element;
+                    break;
+                case 'Marcas de repuestos':
+                    this.partBrandData = element;
+                    break;
+                case 'Marcas de autos':
+                    this.carBrandData = element;
+                    break;
+                default:
+                    break;
+            }
+        });
+    }
+
     private _fixSvgFill(element: Element): void
     {
         // Current URL
