@@ -31,6 +31,13 @@ export class ProjectComponent implements OnInit, OnDestroy
     partBrandData   !: Dashboard ;
     carBrandData    !: Dashboard ;
 
+    lastAutoParts = [
+        {id: 1, name: 'Bujia', quantity: 10},
+        {id: 2, name: 'Filtro de aire', quantity: 5},
+        {id: 3, name: 'Filtro de aceite', quantity: 3},
+        {id: 4, name: 'Filtro de gasolina', quantity: 2},
+    ]
+
     viewAlert:boolean = false;
     dialogMessage !: string;
 

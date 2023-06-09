@@ -103,97 +103,46 @@
                 <mat-tab label="Home">
                     <ng-template matTabContent>
                         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 w-full min-w-0">
-                            <!-- Repuestos -->
-                            <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
-                                <div class="flex items-start justify-between">
-                                    <div class="text-lg font-medium tracking-tight leading-6 truncate">{{autoPartsData.model}}</div>
-                                </div>
-                                <div class="flex flex-col items-center mt-6">
-                                    <div class="text-9xl font-bold tracking-tight leading-none text-blue-500">
-                                        <h1 [countUp]="autoPartsData.total" (complete)="doSomethingOnComplete()">0</h1>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Marca de repuestos -->
-                            <!-- <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
-                                <div class="flex items-start justify-between">
-                                    <div class="text-lg font-medium tracking-tight leading-6 truncate">{{partBrandData.model}}</div>
-                                </div>
-                                <div class="flex flex-col items-center mt-6">
-                                    <div class="text-9xl font-bold tracking-tight leading-none text-red-500">
-                                        <h1 [countUp]="partBrandData.total" (complete)="doSomethingOnComplete()">0</h1>
-                                    </div>
-                                </div>
-                            </div> -->
-                            <!-- Marcas de autos -->
-                            <!-- <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
-                                <div class="flex items-start justify-between">
-                                    <div class="text-lg font-medium tracking-tight leading-6 truncate">{{carBrandData.model}}</div>
-                                </div>
-                                <div class="flex flex-col items-center mt-6">
-                                    <div class="text-9xl font-bold tracking-tight leading-none text-amber-500">
-                                        <h1 [countUp]="carBrandData.total" (complete)="doSomethingOnComplete()">0</h1>
-                                    </div>
-                                </div>
-                            </div> -->
-                            
-                            <fuse-card
-                                class="flex flex-col max-w-80 w-full filter-article filter-interactive"
-                                #expandableCard01="fuseCard">
-                                <img
-                                    class="object-cover"
-                                    src="http://186.13.28.124:3000/20221228_103634.jpg"
-                                    alt="Card cover image">
-                                <div class="m-8 mb-4">
-                                    <div class="text-2xl font-semibold leading-tight">Rocky mountain tops</div>
-                                    <div class="text-secondary text-md mt-1">Updated with 20 new locations</div>
-                                    <div class="mt-4">From rocky mountains to crystal clear lakes, there are the places you must see and enjoy.</div>
-                                    <div class="mt-3 -mx-3">
-                                        <button
-                                            class="px-3"
-                                            mat-button
-                                            [color]="'primary'"
-                                            (click)="expandableCard01.expanded = !expandableCard01.expanded">
-                                            <span class="mr-1">Details</span>
-                                            <mat-icon
-                                                class="icon-size-5 transition-transform ease-in-out duration-150 rotate-0"
-                                                [ngClass]="{'rotate-180': expandableCard01.expanded}"
-                                                [svgIcon]="'heroicons_solid:chevron-down'"></mat-icon>
-                                        </button>
-                                    </div>
-                                </div>
-                                <ng-container fuseCardExpansion>
-                                    <div class="m-8 mt-0">
-                                        <div class="flex items-baseline">
-                                            <div class="mr-2">Open now:</div>
-                                            <div class="text-secondary">08:00AM - 09:00PM</div>
-                                        </div>
-                                        <div class="flex items-baseline mt-1">
-                                            <div class="mr-2">Entrance fee:</div>
-                                            <div class="text-secondary">$20 (USD)</div>
+                            <div *ngFor="let a of lastAutoParts">
+                                <fuse-card
+                                    class="flex flex-col max-w-80 w-full filter-article filter-interactive"
+                                    #expandableCard01="fuseCard">
+                                    <img
+                                        class="object-cover"
+                                        src="http://186.13.28.124:3000/20221228_103634.jpg"
+                                        alt="Card cover image">
+                                    <div class="m-8 mb-4">
+                                        <div class="text-2xl font-semibold leading-tight">ASD</div>
+                                        <div class="text-secondary text-md mt-1">Updated with 20 new locations</div>
+                                        <div class="mt-4">From rocky mountains to crystal clear lakes, there are the places you must see and enjoy.</div>
+                                        <div class="mt-3 -mx-3">
+                                            <button
+                                                class="px-3"
+                                                mat-button
+                                                [color]="'primary'"
+                                                (click)="expandableCard01.expanded = !expandableCard01.expanded">
+                                                <span class="mr-1">Details</span>
+                                                <mat-icon
+                                                    class="icon-size-5 transition-transform ease-in-out duration-150 rotate-0"
+                                                    [ngClass]="{'rotate-180': expandableCard01.expanded}"
+                                                    [svgIcon]="'heroicons_solid:chevron-down'"></mat-icon>
+                                            </button>
                                         </div>
                                     </div>
-                                </ng-container>
-                            </fuse-card>
-
-
-
-                            <!-- Tipos de repuestos -->
-                            <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
-                                <div class="flex items-start justify-between">
-                                    <div class="text-lg font-medium tracking-tight leading-6 truncate">{{partTypesData.model}}</div>
-                                </div>
-                                <div class="flex flex-col items-center mt-6">
-                                    <div class="text-9xl font-bold tracking-tight leading-none text-green-500">
-                                        <h1 [countUp]="partTypesData.total" (complete)="doSomethingOnComplete()">0</h1>
-                                    </div>
-                                    <!-- <div class="flex items-baseline justify-center w-full mt-5 text-secondary">
-                                        <div class="text-md font-medium truncate">Esta semana:</div>
-                                        <div class="ml-1.5 text-lg font-semibold">16</div>
-                                    </div> -->
-                                </div>
+                                    <ng-container fuseCardExpansion>
+                                        <div class="m-8 mt-0">
+                                            <div class="flex items-baseline">
+                                                <div class="mr-2">Open now:</div>
+                                                <div class="text-secondary">08:00AM - 09:00PM</div>
+                                            </div>
+                                            <div class="flex items-baseline mt-1">
+                                                <div class="mr-2">Entrance fee:</div>
+                                                <div class="text-secondary">$20 (USD)</div>
+                                            </div>
+                                        </div>
+                                    </ng-container>
+                                </fuse-card>
                             </div>
-
                         </div>
                     </ng-template>
                 </mat-tab>
