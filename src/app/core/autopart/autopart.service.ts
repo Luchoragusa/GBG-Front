@@ -16,6 +16,10 @@ export class AutopartService {
   getAutoparts(): Observable<Autopart[]> {
     return this._http.get<Autopart[]>(this.url);
   }
+
+  getLastUpdatesAutoparts(): Observable<Autopart[]> {
+    return this._http.get<Autopart[]>(`${this.url}/4`);
+  }
   
   createAutoPart(autopart: any): Observable<Autopart> {
     return this._http.post<Autopart>(`${this.url}/file`, autopart);

@@ -3,7 +3,9 @@ import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { ApexOptions } from 'ng-apexcharts';
 import { DashboardService } from 'app/core/dashboard/dashboard.service';
+import { AutopartService } from 'app/core/autopart/autopart.service';
 import { Dashboard } from 'app/core/dashboard/dashboard';
+import { Autopart } from 'app/core/autopart/autopart';
 
 @Component({
     selector       : 'project',
@@ -31,12 +33,7 @@ export class ProjectComponent implements OnInit, OnDestroy
     partBrandData   !: Dashboard ;
     carBrandData    !: Dashboard ;
 
-    lastAutoParts = [
-        {id: 1, name: 'Bujia', quantity: 10},
-        {id: 2, name: 'Filtro de aire', quantity: 5},
-        {id: 3, name: 'Filtro de aceite', quantity: 3},
-        {id: 4, name: 'Filtro de gasolina', quantity: 2},
-    ]
+    autoParts       !: Autopart[];
 
     viewAlert:boolean = false;
     dialogMessage !: string;
@@ -48,7 +45,8 @@ export class ProjectComponent implements OnInit, OnDestroy
      */
     constructor(
         private _dashboardService: DashboardService,
-        private _router: Router
+        private _router: Router,
+        private _autopartService: AutopartService
     )
     {
     }
@@ -73,6 +71,19 @@ export class ProjectComponent implements OnInit, OnDestroy
                 this.setDialog(error.error.msg);
               }
               this.setDialog("Error de conexion con el servidor");
+            }
+        );
+
+            // Get all autoparts
+        this._autopartService.getAutoparts().subscribe(
+            next => {
+            this.autoParts = next;
+            },
+            error => {
+            if (error.status == 500) {
+                this.setDialog(error.error.msg);
+            }
+            this.setDialog("Error de conexion con el servidor");
             }
         );
         
