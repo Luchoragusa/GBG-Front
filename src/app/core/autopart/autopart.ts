@@ -12,4 +12,6 @@ export interface Autopart {
     drawer: string;
     description: string;
     image: string ;
+    createdAt?: Date;
+    updatedAt?: Date;
 }

@@ -74,8 +74,8 @@ export class ProjectComponent implements OnInit, OnDestroy
             }
         );
 
-            // Get all autoparts
-        this._autopartService.getAutoparts().subscribe(
+        // Get all autoparts
+        this._autopartService.getLastUpdatesAutoparts().subscribe(
             next => {
             this.autoParts = next;
             },
