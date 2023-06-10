@@ -56,6 +56,12 @@ export class SettingsComponent implements OnInit, OnDestroy
 
                 // Store the config
                 this.config = config;
+
+                const scheme = localStorage.getItem('scheme') as Scheme
+                if (scheme && scheme !== config.scheme) {
+                    this.config.scheme = scheme;
+                    this.setScheme(scheme);
+                }
             });
     }
 
@@ -74,7 +80,7 @@ export class SettingsComponent implements OnInit, OnDestroy
     // -----------------------------------------------------------------------------------------------------
 
     /**
-     * Set the layout on the config
+     * Setea el layout de fondo
      *
      * @param layout
      */
@@ -94,22 +100,13 @@ export class SettingsComponent implements OnInit, OnDestroy
     }
 
     /**
-     * Set the scheme on the config
+     * Setea el color de fondo
      *
      * @param scheme
      */
     setScheme(scheme: Scheme): void
     {
+        localStorage.setItem('scheme', scheme);
         this._fuseConfigService.config = {scheme};
-    }
-
-    /**
-     * Set the theme on the config
-     *
-     * @param theme
-     */
-    setTheme(theme: Theme): void
-    {
-        this._fuseConfigService.config = {theme};
     }
 }

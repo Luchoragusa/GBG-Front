@@ -130,10 +130,11 @@ export class AuthService
      */
     signOut(): Observable<any>
     {
-        // Remove the access token from the local storage
+        // Borro de el localStorage la id y el token
         localStorage.removeItem('accessToken');
+        localStorage.removeItem('userId');
 
-        // Set the authenticated flag to false
+        // Seteo la variable de autenticacion como falso
         this._authenticated = false;
 
         // Return the observable
