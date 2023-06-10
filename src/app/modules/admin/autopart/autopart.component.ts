@@ -33,9 +33,18 @@ export class AutopartComponent  implements OnInit {
   configForm: FormGroup;
   editObject: Autopart = null;
   image: string = null;
-  selectedPartType : PartType = null;
-  selectedCarBrand : CarBrand = null;
-  selectedPartBrand: PartBrand = null;
+  selectedPartType : PartType = {
+    id: '0',
+    name: '',
+  };
+  selectedCarBrand : CarBrand = {
+    id: '0',
+    name: '',
+  };
+  selectedPartBrand: PartBrand = {
+    id: '0',
+    name: '',
+  };
 
   // Variables de la alerta de (la que sale arriba a la izquierda)
   alertMessage: string = '';
@@ -285,12 +294,16 @@ export class AutopartComponent  implements OnInit {
       this.sideTittle = "Editar repuesto";
       this.toggleDrawer(true);
       this.editObject = autoPart;
-  
+
+      this.selectedCarBrand = autoPart.carBrand;
+      this.selectedPartBrand = autoPart.partBrand;
+      this.selectedPartType = autoPart.partType;
+
       this.autoPartForm.setValue({
         id          : autoPart.id,
         partModel   : autoPart.partModel,
         drawer      : autoPart.drawer,
-        description : autoPart.description,
+        description : autoPart.description || "-", // <-- Fixed the left-hand side of the OR operator
         serialNumber: autoPart.serialNumber,
         stock       : autoPart.stock,
         partType    : autoPart.partType,
@@ -298,7 +311,6 @@ export class AutopartComponent  implements OnInit {
         carBrand    : autoPart.carBrand,
         image       : null
       });
-  
       this.image = autoPart.image;
     }
 
@@ -311,9 +323,18 @@ export class AutopartComponent  implements OnInit {
 
         // Reset form values
         this.image = null;
-        this.selectedCarBrand = null;
-        this.selectedPartBrand = null;
-        this.selectedPartType = null;
+        this.selectedCarBrand = {
+          id: '0',
+          name: '',
+        };
+        this.selectedPartBrand = {
+          id: '0',
+          name: '',
+        };
+        this.selectedPartType = {
+          id: '0',
+          name: '',
+        };
       }
       this.drawerOpened = !this.drawerOpened;
       this.autoPartForm.reset();

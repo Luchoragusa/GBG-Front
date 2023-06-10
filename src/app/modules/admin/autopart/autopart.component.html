@@ -51,7 +51,7 @@
 
         <!-- Botones (Sumar repuesto, Restar repuesto) -->
 
-        <ng-container *ngIf="mode()"> <!-- Esto es para que se vean los botones en una sola linea -->
+        <ng-container *ngIf="mode()"> <!--Esto es para que se oculten o no -->
           <button
               class="ml-3"
               mat-flat-button
@@ -86,7 +86,7 @@
         <!-- typePart -->
         <mat-form-field class="fuse-mat-bold fuse-mat-dense fuse-mat-rounded">
           <mat-label>Tipo de repuesto</mat-label>
-          <mat-select [(value)]="selectedPartType" formControlName="partType">
+          <mat-select [(value)]="selectedPartType.id" formControlName="partType">
             <mat-option [value]="option.id" *ngFor="let option of partTypes">{{ option.name }}</mat-option>
           </mat-select>
           <mat-error *ngIf="autoPartForm.get('partType').hasError('required')">Es requerido el tipo de repuesto</mat-error>
@@ -95,7 +95,7 @@
         <!-- partBrand -->
         <mat-form-field class="fuse-mat-bold fuse-mat-dense fuse-mat-rounded">
           <mat-label>Marca del repuesto</mat-label>
-          <mat-select [(value)]="selectedPartBrand">
+          <mat-select [(value)]="selectedPartBrand.id">
             <mat-option [value]="option.id" *ngFor="let option of partBrands">{{ option.name }}</mat-option>
           </mat-select>
         </mat-form-field>
@@ -103,7 +103,7 @@
         <!-- carBrand -->
         <mat-form-field class="fuse-mat-bold fuse-mat-dense fuse-mat-rounded">
           <mat-label>Marca de auto</mat-label>
-          <mat-select [(value)]="selectedCarBrand">
+          <mat-select [(value)]="selectedCarBrand.id">
             <mat-option [value]="option.id" *ngFor="let option of carBrands">{{ option.name }}</mat-option>
           </mat-select>
         </mat-form-field>
