@@ -1,8 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { FuseConfigService } from '@fuse/services/config';
-import { AppConfig, Scheme, Theme, Themes } from 'app/core/config/app.config';
+import { AppConfig, Scheme, Themes } from 'app/core/config/app.config';
 import { Layout } from 'app/layout/layout.types';
 
 @Component({
@@ -30,23 +29,12 @@ export class SettingsComponent implements OnInit, OnDestroy
     themes: Themes;
     private _unsubscribeAll: Subject<any> = new Subject<any>();
 
-    /**
-     * Constructor
-     */
+
     constructor(
-        private _router: Router,
         private _fuseConfigService: FuseConfigService
     )
     {
     }
-
-    // -----------------------------------------------------------------------------------------------------
-    // @ Lifecycle hooks
-    // -----------------------------------------------------------------------------------------------------
-
-    /**
-     * On init
-     */
     ngOnInit(): void
     {
         // Subscribe to config changes
@@ -73,20 +61,12 @@ export class SettingsComponent implements OnInit, OnDestroy
 
             });
     }
-
-    /**
-     * On destroy
-     */
     ngOnDestroy(): void
     {
         // Unsubscribe from all subscriptions
         this._unsubscribeAll.next(null);
         this._unsubscribeAll.complete();
     }
-
-    // -----------------------------------------------------------------------------------------------------
-    // @ Public methods
-    // -----------------------------------------------------------------------------------------------------
 
     /**
      * Setea el layout de fondo
