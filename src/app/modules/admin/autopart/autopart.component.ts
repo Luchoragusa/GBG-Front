@@ -266,16 +266,16 @@ export class AutopartComponent  implements OnInit {
       this.autoPartForm.controls['partBrand'].setValue(this.selectedPartBrand); // <-- Set Value formControl for select option value (marcaRepuesto)
       this.autoPartForm.controls['carBrand'].setValue(this.selectedCarBrand); // <-- Set Value formControl for select option value (marcaAuto)
   
-      formData.append('idPartType', this.autoPartForm.value.partType);
-      formData.append('idPartBrand', this.autoPartForm.value.partBrand);
+      formData.append('idPartType', this.autoPartForm.value.partType.id);
+      formData.append('idPartBrand', this.autoPartForm.value.partBrand.id);
       formData.append('partModel', this.autoPartForm.value.partModel);
-      formData.append('idCarBrand', this.autoPartForm.value.carBrand);
+      formData.append('idCarBrand', this.autoPartForm.value.carBrand.id);
       formData.append('serialNumber', this.autoPartForm.value.serialNumber);
       formData.append('description', this.autoPartForm.value.description);
       formData.append('drawer', this.autoPartForm.value.drawer);
       formData.append('stock', this.autoPartForm.value.stock);
       formData.append('image', this.image);
-      
+
       this._autopartService.createAutoPart(formData).subscribe(
         next => {
           // this.dataSource.data.push(next); // Esto es para que se vea en la tabla
