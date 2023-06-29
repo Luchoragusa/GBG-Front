@@ -60,6 +60,7 @@ export class AutopartComponent  implements OnInit {
   sideTittle: string = 'Agregar repuesto';
   isEditAutoPart: boolean = false;
   buttonStatus: boolean = false;
+  btnImgTittle: string = 'Seleccionar imagen';
 
   // ============= Filtro =============
   
@@ -422,9 +423,14 @@ export class AutopartComponent  implements OnInit {
   // Metodo para subir una imagen
   onChange(event: any) {
     this.image = event.target.files[0];
+    this.btnImgTittle = event.target.files[0].name;
   }
 
   getViewAlert(){
     return this.viewAlert;
+  }
+
+  resetVariables(){
+    this.btnImgTittle = "Seleccionar imagen";
   }
 }

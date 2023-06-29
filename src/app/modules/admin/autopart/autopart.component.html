@@ -45,7 +45,7 @@
             <mat-icon class="text-current" [svgIcon]="'heroicons_outline:x'"> </mat-icon>
         </button>
       </div>
-      <!-- Body del sidenav -->
+      <!-- Body del sidenav (Form editar/crear) -->
 
         <mat-divider class="mt-6 mb-8"></mat-divider>
 
@@ -58,27 +58,22 @@
               [color]="'primary'"
               (click)="addStock()">
               <span class="ml-2 mr-1">Agregar 1</span>
-          </button>
-
-          <br>
-
+          </button><br>
           <button
               class="ml-3"
               mat-flat-button
               [color]="'warn'"
               (click)="substracStock()">
               <span class="ml-2 mr-1">Restar 1</span>
-          </button>
+          </button> <br>
 
-          <br>
-          <!-- stock -->
+          <!-- Label del stock -->
           <mat-form-field class="fuse-mat-bold fuse-mat-dense fuse-mat-rounded">
             <mat-label>Stock</mat-label>
             <input matInput type="number" readonly formControlName = "stock">
           </mat-form-field>
 
           <mat-divider class="mt-6 mb-8"></mat-divider>
-
         </ng-container>
 
         <!-- Fin Botones -->
@@ -150,16 +145,13 @@
         </mat-form-field>
 
         <ng-container *ngIf="!mode()">
-          <input (change)="onChange($event)" type="file" formControlName = "image">
+          <button type="button" mat-raised-button (click)="fileInput.click()">{{btnImgTittle}}</button>
+          <!-- <mat-form-field> -->
+              <input hidden (change)="onChange($event)" #fileInput type="file" formControlName = "image">
+              <!-- <span ngIf="image">asdasd</span> -->
+              <!-- <mat-error *ngIf="autoPartForm.get('image').hasError('required')">Es requerida la imagen</mat-error> -->
+            <!-- </mat-form-field> -->
         </ng-container>
-
-        <!-- Preview de la imagen, renderiza cuando se subio algun archivo -->
-        <ng-container *ngIf="mode()">
-          <button mat-icon-button (click)="viewImage()">
-            <i class="fa-solid fa-eye"></i>
-          </button>
-        </ng-container>
-        
         <br>
 
         <div mat-dialog-actions [align]="'end'">
@@ -198,11 +190,6 @@
     <!-- Inputs de los filtros  -->
     <div class = "container">
 
-      <!-- <mat-form-field class = "filtros">
-        <mat-label>Tipo de repuesto</mat-label>
-        <input matInput [formControl]="partTypeFilter" placeholder="Inyector" #input>
-      </mat-form-field> -->
-
       <mat-form-field class="fuse-mat-bold fuse-mat-dense filtros">
         <mat-label>Tipo de repuesto</mat-label>
         <mat-select [(value)]="selectedPartTypeFilter" [formControl]="partTypeFilter">
@@ -210,22 +197,12 @@
         </mat-select>
       </mat-form-field>
 
-      <!-- <mat-form-field class = "fuse-mat-bold fuse-mat-dense filtros">
-        <mat-label>Marca del repuesto</mat-label>
-        <input matInput [formControl]="partBrandFilter" placeholder="Bosch" #input>
-      </mat-form-field> -->
-
       <mat-form-field class="fuse-mat-bold fuse-mat-dense filtros">
         <mat-label>Marca del repuesto</mat-label>
         <mat-select [(value)]="selectedPartBrandFilter" [formControl]="partBrandFilter">
           <mat-option [value]="option.name" *ngFor="let option of partBrands" >{{ option.name }}</mat-option>
         </mat-select>
       </mat-form-field>
-
-      <!-- <mat-form-field class = "fuse-mat-bold fuse-mat-dense filtros">
-        <mat-label>Marca del auto</mat-label>
-        <input matInput [formControl]="carBrandFilter" placeholder="Volkswagen" #input>
-      </mat-form-field> -->
 
       <mat-form-field class="fuse-mat-bold fuse-mat-dense filtros">
         <mat-label>Marca del auto</mat-label>
