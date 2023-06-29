@@ -25,6 +25,10 @@ export class AutopartService {
     return this._http.post<Autopart>(`${this.url}/file`, autopart);
   }
 
+  editAutoPart(autopart: any): Observable<Autopart> {
+    return this._http.put<Autopart>(`${this.url}/${autopart.id}`, autopart);
+  }
+
   addStock (autopart: Autopart): Observable<Autopart> {
     return this._http.put<Autopart>(`${this.url}/add/${autopart.id}`, autopart);
   }

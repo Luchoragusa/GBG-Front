@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
-import {MatTableDataSource} from '@angular/material/table';
+import {MatTable, MatTableDataSource} from '@angular/material/table';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ShowdialogComponent } from './showdialog/showdialog.component';
@@ -26,6 +26,7 @@ export class AutopartComponent  implements OnInit {
   dataSource: MatTableDataSource<Autopart>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatTable) table: MatTable<any>;
   autoParts : Autopart[];
 
   // Variables del formulario
@@ -262,31 +263,51 @@ export class AutopartComponent  implements OnInit {
       this.buttonStatus = true;
       var formData = new FormData()
   
-      this.autoPartForm.controls['partType'].setValue(this.selectedPartType); // <-- Set Value formControl for select option value (marcaRepuesto)
-      this.autoPartForm.controls['partBrand'].setValue(this.selectedPartBrand); // <-- Set Value formControl for select option value (marcaRepuesto)
-      this.autoPartForm.controls['carBrand'].setValue(this.selectedCarBrand); // <-- Set Value formControl for select option value (marcaAuto)
-  
-      formData.append('idPartType', this.autoPartForm.value.partType.id);
-      formData.append('idPartBrand', this.autoPartForm.value.partBrand.id);
-      formData.append('partModel', this.autoPartForm.value.partModel);
-      formData.append('idCarBrand', this.autoPartForm.value.carBrand.id);
-      formData.append('serialNumber', this.autoPartForm.value.serialNumber);
-      formData.append('description', this.autoPartForm.value.description);
-      formData.append('drawer', this.autoPartForm.value.drawer);
-      formData.append('stock', this.autoPartForm.value.stock);
-      formData.append('image', this.image);
+      this.autoPartForm.controls['partType'].setValue(this.selectedPartType.id); // <-- Set Value formControl for select option value (marcaRepuesto)
+      this.autoPartForm.controls['partBrand'].setValue(this.selectedPartBrand.id); // <-- Set Value formControl for select option value (marcaRepuesto)
+      this.autoPartForm.controls['carBrand'].setValue(this.selectedCarBrand.id); // <-- Set Value formControl for select option value (marcaAuto)
 
-      this._autopartService.createAutoPart(formData).subscribe(
-        next => {
-          // this.dataSource.data.push(next); // Esto es para que se vea en la tabla
-          // this.dataSource._updateChangeSubscription(); // Esto es para que se vea en la tabla
-          this.setAlert(`Se creo el repuesto "${this.autoPartForm.value.partModel}"`, "success");
-          this.buttonStatus = false;
-        },
-        error => {
-          this.setDialog(error.error.msg);
-        }
-      );
+      if (this.isEditAutoPart) {
+        console.log(this.autoPartForm.value);
+
+        this._autopartService.editAutoPart(this.autoPartForm.value).subscribe(
+          next => {
+            console.log(next);
+            this.dataSource.data.push(next);
+            this.dataSource._updateChangeSubscription();
+            this.setAlert(`Se edito el repuesto "${this.autoPartForm.value.partModel}"`, "success");
+            this.buttonStatus = false;
+            this.table.renderRows();
+          },
+          error => {
+            this.setDialog(error.error.msg);
+          }
+        );
+
+      } else{ 
+        // Aca se crea el repuesto, se hace en formData por la imagen
+        formData.append('idPartType', this.autoPartForm.value.partType);
+        formData.append('idPartBrand', this.autoPartForm.value.partBrand);
+        formData.append('partModel', this.autoPartForm.value.partModel);
+        formData.append('idCarBrand', this.autoPartForm.value.carBrand);
+        formData.append('serialNumber', this.autoPartForm.value.serialNumber);
+        formData.append('description', this.autoPartForm.value.description);
+        formData.append('drawer', this.autoPartForm.value.drawer);
+        formData.append('stock', this.autoPartForm.value.stock);
+        formData.append('image', this.image);
+
+        this._autopartService.createAutoPart(formData).subscribe(
+          next => {
+            // this.dataSource.data.push(next); // Esto es para que se vea en la tabla
+            // this.dataSource._updateChangeSubscription(); // Esto es para que se vea en la tabla
+            this.setAlert(`Se creo el repuesto "${this.autoPartForm.value.partModel}"`, "success");
+            this.buttonStatus = false;
+          },
+          error => {
+            this.setDialog(error.error.msg);
+          }
+        );
+      }
     }
   
     // Metodo para eidtar un repuesto
@@ -294,6 +315,7 @@ export class AutopartComponent  implements OnInit {
       this.sideTittle = "Editar repuesto";
       this.toggleDrawer(true);
       this.editObject = autoPart;
+      this.autoPartForm.removeControl('image');
 
       this.selectedCarBrand = autoPart.carBrand;
       this.selectedPartBrand = autoPart.partBrand;
