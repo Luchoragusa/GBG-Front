@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
-import {MatTable, MatTableDataSource} from '@angular/material/table';
+import {MatTableDataSource} from '@angular/material/table';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ShowdialogComponent } from './showdialog/showdialog.component';
@@ -26,7 +26,6 @@ export class AutopartComponent  implements OnInit {
   dataSource: MatTableDataSource<Autopart>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatTable) table: MatTable<any>;
   autoParts : Autopart[];
 
   // Variables del formulario
@@ -268,16 +267,12 @@ export class AutopartComponent  implements OnInit {
       this.autoPartForm.controls['carBrand'].setValue(this.selectedCarBrand.id); // <-- Set Value formControl for select option value (marcaAuto)
 
       if (this.isEditAutoPart) {
-        console.log(this.autoPartForm.value);
-
         this._autopartService.editAutoPart(this.autoPartForm.value).subscribe(
           next => {
-            console.log(next);
             this.dataSource.data.push(next);
             this.dataSource._updateChangeSubscription();
             this.setAlert(`Se edito el repuesto "${this.autoPartForm.value.partModel}"`, "success");
             this.buttonStatus = false;
-            this.table.renderRows();
           },
           error => {
             this.setDialog(error.error.msg);
