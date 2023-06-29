@@ -57,11 +57,20 @@ export class SettingsComponent implements OnInit, OnDestroy
                 // Store the config
                 this.config = config;
 
+                // Revisa el localStorage para ver si el usuario tiene un tema guardado
                 const scheme = localStorage.getItem('scheme') as Scheme
                 if (scheme && scheme !== config.scheme) {
                     this.config.scheme = scheme;
                     this.setScheme(scheme);
                 }
+
+                // Revisa el localStorage para ver si el usuario tiene un layout guardado
+                const layout = localStorage.getItem('layout') as Layout
+                if (layout && layout !== config.layout) {
+                    this.config.layout = layout;
+                    this.setLayout(layout);
+                }
+
             });
     }
 
@@ -86,17 +95,8 @@ export class SettingsComponent implements OnInit, OnDestroy
      */
     setLayout(layout: string): void
     {
-        // Clear the 'layout' query param to allow layout changes
-        this._router.navigate([], {
-            queryParams        : {
-                layout: null
-            },
-            queryParamsHandling: 'merge'
-        }).then(() => {
-
-            // Set the config
-            this._fuseConfigService.config = {layout};
-        });
+        localStorage.setItem('layout', layout);
+        this._fuseConfigService.config = {layout};
     }
 
     /**
