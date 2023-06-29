@@ -304,6 +304,7 @@ export class AutopartComponent  implements OnInit {
           }
         );
       }
+      this.resetVariables();
     }
   
     // Metodo para eidtar un repuesto
@@ -354,8 +355,7 @@ export class AutopartComponent  implements OnInit {
           name: '',
         };
       }
-      this.drawerOpened = !this.drawerOpened;
-      this.autoPartForm.reset();
+      this.resetVariables();
     }
 
     // Metodo para agregar un repuesto al stock
@@ -431,6 +431,9 @@ export class AutopartComponent  implements OnInit {
   }
 
   resetVariables(){
+    console.log("reset");
+    this.autoPartForm.reset();
     this.btnImgTittle = "Seleccionar imagen";
+    this.drawerOpened = !this.drawerOpened;
   }
 }
