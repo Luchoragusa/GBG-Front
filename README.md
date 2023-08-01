@@ -12,5 +12,3 @@ un servidor propio.
 Como el proyecto esta actualmente en produccion, yo lo hice pensando en eso y hay items que nos los cumpli por completo, pero hice algunas otras cositas que no se pedian
 
 Por otro lado el proyecto cuenta con un Back-End [Repo Back-End](https://github.com/Luchoragusa/GBG-Back) y la base de datos utilizada es MySQL. Adjunto el link de la documentacion de los endpoints [Documentacion de EndPoints](https://documenter.getpostman.com/view/23041568/2s9XxvTEvV).
-
-Para correr el proyecto de front de forma local, adjunto en el classroom el archivo .env.
